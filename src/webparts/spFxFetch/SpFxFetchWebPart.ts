@@ -32,23 +32,26 @@ export default class SpFxFetchWebPart extends BaseClientSideWebPart<ISpFxFetchWe
         </div>
       </div>`;
 
-      (async () => {
+      this.runCode()
+  }
 
-        try {
-          
-          const _sPFXFetcher: SPFxFetcher = new SPFxFetcher(this.context.spHttpClient);
-          
-          const currentWebUrl: string = this.context.pageContext.web.absoluteUrl;
-          
-          const _list: IODataList = await _sPFXFetcher.get(`${currentWebUrl}/_api/lists/GetByTitle('Documents1')`);
-          
-          console.log(_list);
+  private async runCode() {
 
-        } catch (error) {
-          console.log(error);
-        }
+    try {
 
-      })();
+      const _sPFXFetcher: SPFxFetcher = new SPFxFetcher(this.context.spHttpClient);
+      const currentWebUrl: string = this.context.pageContext.web.absoluteUrl;
+
+
+      const _list: IODataList = await _sPFXFetcher.get(`${currentWebUrl}/_api/lists/GetByTitle('Documents')`);
+      console.log(_list);
+
+      const results: JSON = await _sPFXFetcher.get(`${currentWebUrl}/_api/search/query?querytext='sharepoint'`);
+      console.log(results);
+
+    } catch (error) {
+      console.log(error);
+    }
 
   }
 

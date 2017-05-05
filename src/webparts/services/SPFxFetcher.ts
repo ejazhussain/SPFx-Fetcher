@@ -1,5 +1,5 @@
 
-import { SPHttpClient, SPHttpClientResponse, SPHttpClientConfiguration } from '@microsoft/sp-http';
+import { SPHttpClient, SPHttpClientResponse, SPHttpClientConfiguration, ODataVersion } from '@microsoft/sp-http';
 import { ISPFxFetcher } from '../interfaces';
 
 export class SPFxFetcher implements ISPFxFetcher {
@@ -11,25 +11,26 @@ export class SPFxFetcher implements ISPFxFetcher {
     }
 
     public get(endpoint: string, config: SPHttpClientConfiguration = SPHttpClient.configurations.v1): Promise<any> {
+        
+        if(endpoint.indexOf("/_api/search/") != -1){
+            config = config.overrideWith({ defaultODataVersion: ODataVersion.v3 });
+        }
+
+        return this._spHttpClient.get(endpoint, config).then(this.processResponse);
+    }
+
+    private processResponse(response: SPHttpClientResponse): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-
-            return this._spHttpClient.get(endpoint, config)
-                .then((response: SPHttpClientResponse) => {
-                    if (response.ok) {
-                        response.json().then((responseJSON) => {
-                            resolve(responseJSON);
-                        });
-                    }
-                    else {
-                        response.text().then((responseText) => {
-
-                            reject(responseText);
-                        });
-                    }
+            if (response.ok) {
+                response.json().then((responseJSON) => {
+                    resolve(responseJSON);
                 });
-
+            }
+            else {
+                response.text().then((responseText) => {
+                    reject(responseText);
+                });
+            }
         });
-
-
     }
 }
