@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "entry": "./lib/webparts/spFxFetch/SpFxFetchWebPart.js",
+      "manifest": "./src/webparts/spFxFetch/SpFxFetchWebPart.manifest.json",
+      "outputPath": "./dist/sp-fx-fetch.bundle.js"
+    }
+  ],
+  "externals": {},
+  "localizedResources": {
+    "spFxFetchStrings": "webparts/spFxFetch/loc/{locale}.js"
+  }
+}

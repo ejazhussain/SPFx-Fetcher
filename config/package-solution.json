@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "name": "spfx-fetch-helper-client-side-solution",
+    "id": "54f78c37-0b88-475b-9dfd-79853d972802",
+    "version": "1.0.0.0"
+  },
+  "paths": {
+    "zippedPackage": "solution/spfx-fetch-helper.sppkg"
+  }
+}

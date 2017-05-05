@@ -1,0 +1,1 @@
+export { ISPFxFetcher } from './ISPFxFetcher';

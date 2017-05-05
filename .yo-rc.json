@@ -1,0 +1,8 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "libraryName": "spfx-fetch-helper",
+    "framework": "none",
+    "version": "1.0.2",
+    "libraryId": "54f78c37-0b88-475b-9dfd-79853d972802"
+  }
+}
